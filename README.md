@@ -25,12 +25,12 @@ kubectl apply -f cert/certificates.yaml
 ### Prepare Config syncer
 
 ```shell
-# Create namespace kafka and label it "app=kafka"
+# Create namespace kafka and label it "need=root-secret"
 kubectl create ns kafka
-kubectl label namespace kafka app=kafka
+kubectl label namespace kafka need=root-secret
 
-# annotate root-secret so that it replicate to namespace with label "app=kafka"
-kubectl -n cert-manager annotate secrets root-secret kubed.appscode.com/sync="app=kafka" --overwrite
+# annotate root-secret so that it replicate to namespace with label "need=root-secret"
+kubectl -n cert-manager annotate secrets root-secret kubed.appscode.com/sync="need=root-secret" --overwrite
 ```
 
 ## Installation
