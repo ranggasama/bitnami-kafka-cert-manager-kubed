@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: client-properties
+  namespace: kafka
+data:
+  # property defined using --from-file
+  client.properties: |-
+    security.protocol=SSL
+    ssl.truststore.type=PEM
+    ssl.truststore.location= /certs/ca.crt
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kafka-client
+  namespace: kafka
+spec:
+  containers:
+    - name: kafka-client
+      image: docker.io/bitnami/kafka:3.1.0-debian-10-r89
+      command: [ "sleep", "infinity" ]
+      volumeMounts:
+      - name: root-secret
+        mountPath: /certs
+      - name: client-properties
+        mountPath: /tmp
+  volumes:
+    - name: root-secret
+      secret:
+        secretName: root-secret
+        items:
+        - key: ca.crt
+          path: ca.crt
+    - name: client-properties
+      configMap:
+        name: client-properties
+  restartPolicy: Never

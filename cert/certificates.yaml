@@ -1,0 +1,62 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: kafka-0.kafka-headless
+  namespace: kafka
+spec:
+  secretName: secret-kafka-0-tls
+  commonName: kafka-0.kafka-headless
+  isCA: false
+  dnsNames:
+  - kafka-0.kafka-headless.kafka.svc.cluster.local
+  - kafka.kafka.svc.cluster.local
+  - kafka-0.kafka-headless.kafka
+  - kafka.kafka
+  - kafka-0.kafka-headless
+  - kafka
+  issuerRef:
+    name: my-ca-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: kafka-1.kafka-headless
+  namespace: kafka
+spec:
+  secretName: secret-kafka-1-tls
+  commonName: kafka-1.kafka-headless
+  isCA: false
+  dnsNames:
+  - kafka-1.kafka-headless.kafka.svc.cluster.local
+  - kafka.kafka.svc.cluster.local
+  - kafka-1.kafka-headless.kafka
+  - kafka.kafka
+  - kafka-1.kafka-headless
+  - kafka
+  issuerRef:
+    name: my-ca-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: kafka-2.kafka-headless
+  namespace: kafka
+spec:
+  secretName: secret-kafka-2-tls
+  commonName: kafka-2.kafka-headless
+  isCA: false
+  dnsNames:
+  - kafka-2.kafka-headless.kafka.svc.cluster.local
+  - kafka.kafka.svc.cluster.local
+  - kafka-2.kafka-headless.kafka
+  - kafka.kafka
+  - kafka-2.kafka-headless
+  - kafka
+  issuerRef:
+    name: my-ca-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
